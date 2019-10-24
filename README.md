@@ -1,1 +1,2 @@
-# dbms-cinema-project
+### Database Management Systems 
+cinema project
