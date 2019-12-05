@@ -17,9 +17,11 @@ import org.hibernate.Transaction;
  */
 
 public class MainClass {
-        static Session session;
+    
+    static Session session;
+
+    public static void insert(Customer c){
         
-        public static void insert(Customer c){
         session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx;
         tx = session.beginTransaction();
@@ -27,15 +29,37 @@ public class MainClass {
         tx.commit();
 //        session.flush();
         session.close();
-       
+
     }
     
+    public static void delete(Customer c){
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx;
+        tx = session.beginTransaction();
+        session.delete(c);
+        tx.commit();
+//        session.flush();
+        session.close();
+       
+    }
+       
+    
     public static void main(String[] args) {
-        System.out.println("test yazıldı");
-        Customer c = new Customer("user_ben", "1234", "a@b.com", new Date(1,1,2019), "canakkale", "USA");
-        System.out.println("test yazıldı");
-        insert(c);
-        System.out.println("test yazıldı");
+//        Customer c = new Customer("user_ben", "1234", "a@b.com", new Date(1,1,2019), "canakkale", "USA");
+//        insert(c);
+
+//        Customer c = new Customer("user_ben", "1234", "a@b.com", new Date(1,1,2019), "canakkale", "USA");
+//        delete(c);
+        session = HibernateUtil.getSessionFactory().openSession();
+        Object o = session.load(Customer.class, "user10");
+        Customer c = (Customer)o;
+        
+        Transaction tx;
+        tx = session.beginTransaction();
+        c.setAddress("ankara");
+        tx.commit();
+        session.close();
+
         System.exit(0);
         
     }
