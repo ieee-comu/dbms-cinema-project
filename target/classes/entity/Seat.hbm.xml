@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 5, 2019 10:39:33 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Seat" table="seat" catalog="cinema_project" optimistic-lock="version">
+        <id name="seatNo" type="java.lang.Integer">
+            <column name="seat_no" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="ticketSeller" class="entity.TicketSeller" fetch="select">
+            <column name="ticket_seller_username" length="50" not-null="true" />
+        </many-to-one>
+        <property name="seatPrice" type="int">
+            <column name="seat_price" not-null="true" />
+        </property>
+        <set name="reserveses" table="reserves" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="seat_no" not-null="true" />
+            </key>
+            <one-to-many class="entity.Reserves" />
+        </set>
+    </class>
+</hibernate-mapping>

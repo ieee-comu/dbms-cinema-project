@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 5, 2019 10:39:33 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.CanCommentOn" table="can_comment_on" catalog="cinema_project" optimistic-lock="version">
+        <composite-id name="id" class="entity.CanCommentOnId">
+            <key-property name="customerUsername" type="string">
+                <column name="customer_username" length="50" />
+            </key-property>
+            <key-property name="movieSerialNo" type="int">
+                <column name="movie_serial_no" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="customer" class="entity.Customer" update="false" insert="false" fetch="select">
+            <column name="customer_username" length="50" not-null="true" />
+        </many-to-one>
+        <many-to-one name="movie" class="entity.Movie" update="false" insert="false" fetch="select">
+            <column name="movie_serial_no" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

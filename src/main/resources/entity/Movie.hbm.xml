@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 5, 2019 10:39:33 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Movie" table="movie" catalog="cinema_project" optimistic-lock="version">
+        <id name="movieSerialNo" type="java.lang.Integer">
+            <column name="movie_serial_no" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="manager" class="entity.Manager" fetch="select">
+            <column name="manager_username" length="50" not-null="true" />
+        </many-to-one>
+        <property name="createdDate" type="date">
+            <column name="created_date" length="10" not-null="true" />
+        </property>
+        <property name="soonFlag" type="string">
+            <column name="soon_flag" length="50" not-null="true" />
+        </property>
+        <property name="trailerLink" type="string">
+            <column name="trailer_link" length="50" not-null="true" />
+        </property>
+        <property name="movieName" type="int">
+            <column name="movie_name" not-null="true" />
+        </property>
+        <property name="movieDesc" type="string">
+            <column name="movie_desc" length="50" not-null="true" />
+        </property>
+        <property name="movieImage" type="string">
+            <column name="movie_image" length="50" not-null="true" />
+        </property>
+        <set name="canCommentOns" table="can_comment_on" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="movie_serial_no" not-null="true" />
+            </key>
+            <one-to-many class="entity.CanCommentOn" />
+        </set>
+    </class>
+</hibernate-mapping>

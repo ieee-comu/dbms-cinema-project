@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 5, 2019 10:39:33 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.CmsPage" table="cms_page" catalog="cinema_project" optimistic-lock="version">
+        <id name="pageTitle" type="string">
+            <column name="page_title" length="50" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="manager" class="entity.Manager" fetch="select">
+            <column name="manager_username" length="50" not-null="true" />
+        </many-to-one>
+        <property name="pageBody" type="string">
+            <column name="page_body" length="50" not-null="true" />
+        </property>
+        <property name="pageTags" type="string">
+            <column name="page_tags" length="50" not-null="true" />
+        </property>
+        <property name="pageDesc" type="string">
+            <column name="page_desc" length="50" not-null="true" />
+        </property>
+        <property name="modifiedDate" type="date">
+            <column name="modified_date" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
