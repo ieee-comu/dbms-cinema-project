@@ -12,18 +12,23 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
- * created on Dec 5, 2019 10:40:56 PM
+ * created on Dec 6, 2019 10:03:23 AM
  * @author bayramcicek
  */
 
-public class MainClass {
+public class DemoClass {
     
     static Session session;
 
     public static void insert(Customer c){
         
         session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
+        Transaction tx;
+        tx = session.beginTransaction();
+        session.save(c);
+        tx.commit();
+//        session.flush();
+        session.close();
 
     }
     
@@ -37,7 +42,8 @@ public class MainClass {
         session.close();
        
     }
-       
+    
+    
     
     public static void main(String[] args) {
 //        Customer c = new Customer("user_ben", "1234", "a@b.com", new Date(1,1,2019), "canakkale", "USA");
