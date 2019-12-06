@@ -42,12 +42,12 @@ public class MainFrame extends javax.swing.JFrame {
         customer_jButton = new javax.swing.JButton();
         for_jLabel = new javax.swing.JLabel();
         main_login_jButton = new javax.swing.JButton();
+        edit_jLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(249, 249, 249));
-        setPreferredSize(new java.awt.Dimension(530, 300));
         setResizable(false);
-        setSize(new java.awt.Dimension(530, 300));
+        setSize(new java.awt.Dimension(539, 283));
 
         top_jLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         top_jLabel.setText("Veritabanı Yönetim Sistemleri Dönem Projesi - Güz 2019 - Sinema Otomasyon Projesi");
@@ -133,9 +133,12 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(for_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(main_login_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(edit_jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(for_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(main_login_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(148, 148, 148))
         );
         layout.setVerticalGroup(
@@ -156,7 +159,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(for_jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(main_login_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edit_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -168,36 +173,47 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void manager_jButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manager_jButtonMouseClicked
         // TODO add your handling code here:
+        edit_jLabel.setText("");
         for_jLabel.setText("Manager");
 
     }//GEN-LAST:event_manager_jButtonMouseClicked
 
     private void ticket_seller_jButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ticket_seller_jButtonMouseClicked
         // TODO add your handling code here:
+        edit_jLabel.setText("");
         for_jLabel.setText("Ticket Seller");
     }//GEN-LAST:event_ticket_seller_jButtonMouseClicked
 
     private void customer_jButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customer_jButtonMouseClicked
         // TODO add your handling code here:
+        edit_jLabel.setText("");
         for_jLabel.setText("Customer");
     }//GEN-LAST:event_customer_jButtonMouseClicked
 
     private void main_login_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_main_login_jButtonActionPerformed
-        // TODO add your handling code here:
-        if ("Manager".equals(for_jLabel.getText())) {
-            ManagerFrame man = new ManagerFrame();
-            man.setVisible(true);
-            setVisible(false);
-        } else if ("Ticket Seller".equals(for_jLabel.getText())) {
-            TicketSellerFrame seller = new TicketSellerFrame();
-            seller.setVisible(true);
-            setVisible(false);
-        } else if ("Customer".equals(for_jLabel.getText())) {
-            CustomerFrame customer = new CustomerFrame();
-            customer.setVisible(true);
-            setVisible(false);
-        } else {
+        if (null == for_jLabel.getText()) {
             for_jLabel.setText("");
+        } else // TODO add your handling code here:
+        switch (for_jLabel.getText()) {
+            case "Manager":
+                ManagerFrame man = new ManagerFrame();
+                man.setVisible(true);
+                setVisible(false);
+                break;
+            case "Ticket Seller":
+                TicketSellerFrame seller = new TicketSellerFrame();
+                seller.setVisible(true);
+                setVisible(false);
+                break;
+            case "Customer":
+                CustomerFrame customer = new CustomerFrame();
+                customer.setVisible(true);
+                setVisible(false);
+                break;
+            default:
+                for_jLabel.setText("");
+                edit_jLabel.setText("Please select one of the buttons above");
+                break;
         }
     }//GEN-LAST:event_main_login_jButtonActionPerformed
 
@@ -239,6 +255,7 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel contributors_jLabel;
     private javax.swing.JButton customer_jButton;
+    private javax.swing.JLabel edit_jLabel;
     private javax.swing.JLabel for_jLabel;
     private javax.swing.JButton main_login_jButton;
     private javax.swing.JButton manager_jButton;

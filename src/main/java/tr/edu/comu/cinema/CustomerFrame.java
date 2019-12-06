@@ -204,6 +204,8 @@ public class CustomerFrame extends javax.swing.JFrame {
 
         } else {
             try {
+                username_jLabel.setText("");
+                password_jLabel.setText("");
 
                 session = HibernateUtil.getSessionFactory().openSession();
 
@@ -220,7 +222,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                 .setString("u", username_jtextField.getText())
                 .setString("p", password_jPasswordField.getText())
                 .list();
-
+                System.out.println(results);
                 if ((results != null) && (results.size() > 0)) {
                     JOptionPane.showMessageDialog(null, "Login SUCCESSFUL!!!");
                     //                    MainMenu menu = new MainMenu();
