@@ -1,5 +1,5 @@
 package entity;
-// Generated Dec 5, 2019 10:39:33 PM by Hibernate Tools 4.3.1
+// Generated Dec 8, 2019 1:55:43 AM by Hibernate Tools 4.3.1
 
 
 
@@ -9,24 +9,23 @@ package entity;
 public class Reserves  implements java.io.Serializable {
 
 
-     private ReservesId id;
+     private Integer id;
      private Customer customer;
      private Seat seat;
 
     public Reserves() {
     }
 
-    public Reserves(ReservesId id, Customer customer, Seat seat) {
-       this.id = id;
+    public Reserves(Customer customer, Seat seat) {
        this.customer = customer;
        this.seat = seat;
     }
    
-    public ReservesId getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(ReservesId id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public Customer getCustomer() {

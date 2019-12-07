@@ -41,12 +41,12 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="cinema_project"/>
-  <table-filter match-name="seat"/>
-  <table-filter match-name="can_comment_on"/>
-  <table-filter match-name="manager"/>
-  <table-filter match-name="movie"/>
-  <table-filter match-name="ticket_seller"/>
-  <table-filter match-name="reserves"/>
   <table-filter match-name="cms_page"/>
+  <table-filter match-name="ticket_seller"/>
+  <table-filter match-name="manager"/>
+  <table-filter match-name="can_comment_on"/>
+  <table-filter match-name="seat"/>
+  <table-filter match-name="reserves"/>
   <table-filter match-name="customer"/>
+  <table-filter match-name="movie"/>
 </hibernate-reverse-engineering>

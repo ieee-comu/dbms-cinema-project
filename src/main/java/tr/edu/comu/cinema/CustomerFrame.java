@@ -197,6 +197,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                         .addComponent(reserve_jButton)
                         .addComponent(comment_jButton)
                         .addComponent(log_JLabel)))
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(main_IMG_jLabel)
                     .addGroup(layout.createSequentialGroup()
@@ -221,7 +222,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(as_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(log_for_jLabel))
-                .addGap(20, 20, 20))
+                .addGap(8, 8, 8))
         );
 
         pack();
