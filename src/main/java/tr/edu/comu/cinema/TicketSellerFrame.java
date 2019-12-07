@@ -13,6 +13,7 @@ import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import entity.TicketSeller;
 
 /**
  * created on Dec 6, 2019 2:27:40 PM
@@ -228,9 +229,9 @@ public class TicketSellerFrame extends javax.swing.JFrame {
 
                 if ((results != null) && (results.size() > 0)) {
                     JOptionPane.showMessageDialog(null, "Login SUCCESSFUL!!!");
-                    //                    MainMenu menu = new MainMenu();
-                    //                    menu.setVisible(true);
-                    //                    setVisible(false);
+                    Ticket_ReserveSeatFrame res = new Ticket_ReserveSeatFrame((TicketSeller)results.get(0));
+                    res.setVisible(true);
+                    setVisible(false);
 
                 }else {
 
