@@ -51,10 +51,17 @@ public class ManagerFrame extends javax.swing.JFrame {
         password_jLabel = new javax.swing.JLabel();
         password_jPasswordField = new javax.swing.JPasswordField();
         back_jButton = new javax.swing.JButton();
+        log_JLabel = new javax.swing.JLabel();
+        control_jButton = new javax.swing.JButton();
+        movie_jButton = new javax.swing.JButton();
+        log_for_jLabel = new javax.swing.JLabel();
+        as_jLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(503, 350));
+        setPreferredSize(new java.awt.Dimension(503, 350));
         setResizable(false);
-        setSize(new java.awt.Dimension(530, 330));
+        setSize(new java.awt.Dimension(503, 350));
 
         top_jLabel.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         top_jLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -107,59 +114,96 @@ public class ManagerFrame extends javax.swing.JFrame {
             }
         });
 
+        log_JLabel.setText("Login as:");
+
+        control_jButton.setText("Control CMS page");
+        control_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                control_jButtonActionPerformed(evt);
+            }
+        });
+
+        movie_jButton.setText("Edit Movies");
+        movie_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                movie_jButtonActionPerformed(evt);
+            }
+        });
+
+        log_for_jLabel.setText("Login for:");
+
+        as_jLabel.setPreferredSize(new java.awt.Dimension(0, 14));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(top_jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(main_IMG_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(log_JLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(control_jButton)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(user_IMG_jLabel)
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(username_jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                        .addComponent(username_jtextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(48, 48, 48)
+                        .addComponent(movie_jButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(top_jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(log_for_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(as_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(main_IMG_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(19, 19, 19)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(password_jLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(clear_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(30, 30, 30)
-                                            .addComponent(signin_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(password_IMG_Label)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(password_jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(back_jButton))
-                        .addGap(0, 28, Short.MAX_VALUE)))
-                .addContainerGap())
+                                            .addComponent(user_IMG_jLabel)
+                                            .addGap(18, 18, 18)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(username_jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                                .addComponent(username_jtextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(48, 48, 48)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(password_jLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(clear_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(30, 30, 30)
+                                                    .addComponent(signin_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(password_IMG_Label)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(password_jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(back_jButton))
+                                .addGap(0, 9, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(top_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGap(1, 1, 1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(control_jButton)
+                    .addComponent(movie_jButton)
+                    .addComponent(log_JLabel))
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(main_IMG_jLabel)
-                        .addGap(32, 32, 32))
+                    .addComponent(main_IMG_jLabel, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(username_jtextField)
                             .addComponent(user_IMG_jLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(username_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(password_IMG_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(password_jPasswordField))
@@ -170,8 +214,12 @@ public class ManagerFrame extends javax.swing.JFrame {
                             .addComponent(clear_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(signin_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(back_jButton)
-                        .addGap(32, 32, 32))))
+                        .addComponent(back_jButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(log_for_jLabel)
+                    .addComponent(as_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -191,6 +239,8 @@ public class ManagerFrame extends javax.swing.JFrame {
         }else if (password_jPasswordField.getText().trim().isEmpty()) {
             password_jLabel.setText("Please fill out Password");
 
+        } else if (as_jLabel.getText().trim().isEmpty()) {
+            username_jLabel.setText("Please select why login for");
         } else {
             try {
                 username_jLabel.setText("");
@@ -216,9 +266,15 @@ public class ManagerFrame extends javax.swing.JFrame {
                 
                 if ((results != null) && (results.size() > 0)) {
                     JOptionPane.showMessageDialog(null, "Login SUCCESSFUL!!!");
-//                    MainMenu menu = new MainMenu();
-//                    menu.setVisible(true);
-//                    setVisible(false);
+                    if ("Control CMS Page".equals(as_jLabel.getText())) {
+                        Manager_ControlCmsPageFrame menu = new Manager_ControlCmsPageFrame();
+                        menu.setVisible(true);
+                        setVisible(false);
+                    } else {
+                        Manager_EditMovieFrame menu = new Manager_EditMovieFrame();
+                        menu.setVisible(true);
+                        setVisible(false);
+                    }
 
                 }else {
                     
@@ -261,6 +317,20 @@ public class ManagerFrame extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_back_jButtonActionPerformed
 
+    private void control_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_control_jButtonActionPerformed
+        // TODO add your handling code here:
+        as_jLabel.setText("Control CMS Page");
+        username_jLabel.setText("");
+        password_jLabel.setText("");
+    }//GEN-LAST:event_control_jButtonActionPerformed
+
+    private void movie_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_movie_jButtonActionPerformed
+        // TODO add your handling code here:
+        as_jLabel.setText("Edit Movies");
+        username_jLabel.setText("");
+        password_jLabel.setText("");
+    }//GEN-LAST:event_movie_jButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -298,9 +368,14 @@ public class ManagerFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel as_jLabel;
     private javax.swing.JButton back_jButton;
     private javax.swing.JButton clear_jButton;
+    private javax.swing.JButton control_jButton;
+    private javax.swing.JLabel log_JLabel;
+    private javax.swing.JLabel log_for_jLabel;
     private javax.swing.JLabel main_IMG_jLabel;
+    private javax.swing.JButton movie_jButton;
     private javax.swing.JLabel password_IMG_Label;
     private javax.swing.JLabel password_jLabel;
     private javax.swing.JPasswordField password_jPasswordField;

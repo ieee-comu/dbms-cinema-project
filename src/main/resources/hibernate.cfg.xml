@@ -46,6 +46,7 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cinema_project?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">admin123</property>
     <property name="hibernate.connection.password">12345678</property>
+    <property name="hibernate.enable_lazy_load_no_trans">true</property>
     <mapping resource="entity/TicketSeller.hbm.xml"/>
     <mapping resource="entity/Manager.hbm.xml"/>
     <mapping resource="entity/CanCommentOn.hbm.xml"/>
