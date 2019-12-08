@@ -6,15 +6,75 @@
 
 package tr.edu.comu.cinema;
 
+import entity.Manager;
+import entity.Movie;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 /**
  * created on Dec 7, 2019 7:54:33 PM
  * @author bayramcicek
  */
 public class Manager_EditMovieFrame extends javax.swing.JFrame {
+    
+    static Session session;
+    private static Manager current_user;
 
-    /** Creates new form MovieFrame */
-    public Manager_EditMovieFrame() {
+    /** Creates new form MovieFrame
+     * @param current_user */
+    public Manager_EditMovieFrame(Manager current_user) {
         initComponents();
+        show_all_data();
+        Manager_EditMovieFrame.current_user = current_user;
+        manager_username_jTextField.setText(Manager_EditMovieFrame.current_user.getUsername());
+    }
+    
+    private static <Movie> List<Movie> loadMovieData(Class<Movie> type, Session session) {
+
+        CriteriaBuilder builder;
+        builder = session.getCriteriaBuilder();
+        CriteriaQuery<Movie> criteria = builder.createQuery(type);
+        criteria.from(type);
+        List<Movie> data;
+        data = session.createQuery(criteria).getResultList();
+        return data;
+
+    }
+
+    private void show_all_data() {
+
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+        } catch (HibernateException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+        List<Movie> movie_data = loadMovieData(Movie.class, session);
+        session.close();
+
+        DefaultTableModel modelMovie = (DefaultTableModel) movie_jTable.getModel();
+        Object[] rowMovie = new Object[8];
+        for (int i = 0; i < movie_data.size(); i++) {
+            rowMovie[0] = movie_data.get(i).getMovieSerialNo();
+            rowMovie[1] = movie_data.get(i).getCreatedDate();
+            rowMovie[2] = movie_data.get(i).getSoonFlag();
+            rowMovie[3] = movie_data.get(i).getTrailerLink();
+            rowMovie[4] = movie_data.get(i).getMovieName();
+            rowMovie[5] = movie_data.get(i).getMovieDesc();
+            rowMovie[6] = movie_data.get(i).getMovieImage();
+            rowMovie[7] = movie_data.get(i).getManager().getUsername();
+            modelMovie.addRow(rowMovie);
+
+        }
+
     }
 
     /** This method is called from within the constructor to
@@ -26,21 +86,445 @@ public class Manager_EditMovieFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        movie_jTable = new javax.swing.JTable();
+        delete_jButton = new javax.swing.JButton();
+        movie_name_jTextField = new javax.swing.JTextField();
+        refresh_jButton = new javax.swing.JButton();
+        link_jLabel = new javax.swing.JLabel();
+        movie_name_jLabel1 = new javax.swing.JLabel();
+        manager_username_jTextField = new javax.swing.JTextField();
+        link_jTextField = new javax.swing.JTextField();
+        desc_jLabel1 = new javax.swing.JLabel();
+        manager_username_jLabel = new javax.swing.JLabel();
+        alert_jLabel = new javax.swing.JLabel();
+        insert_jButton = new javax.swing.JButton();
+        movie_jLabel = new javax.swing.JLabel();
+        movie_no_jLabel = new javax.swing.JLabel();
+        update_jButton = new javax.swing.JButton();
+        movie_no_jTextField = new javax.swing.JTextField();
+        flag_jLabel = new javax.swing.JLabel();
+        flag_jTextField = new javax.swing.JTextField();
+        desc_jTextField = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        movie_jTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Movie Serial No", "Created Date", "Soon Flag", "Trailer Link", "Movie Name", "Description", "Image", "Manager Username"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        movie_jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                movie_jTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(movie_jTable);
+
+        delete_jButton.setText("DELETE");
+        delete_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_jButtonActionPerformed(evt);
+            }
+        });
+
+        movie_name_jTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                movie_name_jTextFieldActionPerformed(evt);
+            }
+        });
+        movie_name_jTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                movie_name_jTextFieldKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                movie_name_jTextFieldKeyReleased(evt);
+            }
+        });
+
+        refresh_jButton.setText("REFRESH");
+        refresh_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refresh_jButtonActionPerformed(evt);
+            }
+        });
+
+        link_jLabel.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        link_jLabel.setText("Link:");
+
+        movie_name_jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        movie_name_jLabel1.setText("Movie Name:");
+
+        manager_username_jTextField.setEnabled(false);
+        manager_username_jTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manager_username_jTextFieldActionPerformed(evt);
+            }
+        });
+
+        link_jTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                link_jTextFieldActionPerformed(evt);
+            }
+        });
+        link_jTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                link_jTextFieldKeyReleased(evt);
+            }
+        });
+
+        desc_jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        desc_jLabel1.setText("Desc:");
+
+        manager_username_jLabel.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        manager_username_jLabel.setText("Manager Username:");
+
+        alert_jLabel.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
+
+        insert_jButton.setText("INSERT");
+        insert_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insert_jButtonActionPerformed(evt);
+            }
+        });
+
+        movie_jLabel.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        movie_jLabel.setText("Edit Movies");
+
+        movie_no_jLabel.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        movie_no_jLabel.setText("Movie Serial No:");
+
+        update_jButton.setText("UPDATE");
+        update_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_jButtonActionPerformed(evt);
+            }
+        });
+
+        movie_no_jTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                movie_no_jTextFieldActionPerformed(evt);
+            }
+        });
+        movie_no_jTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                movie_no_jTextFieldKeyReleased(evt);
+            }
+        });
+
+        flag_jLabel.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        flag_jLabel.setText("Flag:");
+        flag_jLabel.setPreferredSize(new java.awt.Dimension(35, 16));
+
+        flag_jTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                flag_jTextFieldActionPerformed(evt);
+            }
+        });
+        flag_jTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                flag_jTextFieldKeyReleased(evt);
+            }
+        });
+
+        desc_jTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                desc_jTextFieldActionPerformed(evt);
+            }
+        });
+        desc_jTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                desc_jTextFieldKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(manager_username_jLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(manager_username_jTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(alert_jLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(movie_jLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(refresh_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(insert_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(update_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(delete_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGap(1, 1, 1)))
+                    .addComponent(movie_name_jTextField)
+                    .addComponent(movie_no_jTextField)
+                    .addComponent(movie_no_jLabel)
+                    .addComponent(movie_name_jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(link_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(flag_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(desc_jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(flag_jTextField)
+                            .addComponent(link_jTextField)
+                            .addComponent(desc_jTextField))))
+                .addGap(1, 1, 1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(movie_no_jLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(movie_no_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(movie_name_jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(movie_name_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(link_jLabel)
+                    .addComponent(link_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(flag_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(flag_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(desc_jLabel1)
+                    .addComponent(desc_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addComponent(manager_username_jLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(manager_username_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(alert_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(movie_jLabel)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(insert_jButton)
+                    .addComponent(update_jButton)
+                    .addComponent(delete_jButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(refresh_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void movie_jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_movie_jTableMouseClicked
+        // TODO add your handling code here:
+        int i = movie_jTable.getSelectedRow();
+        TableModel model = movie_jTable.getModel();
+        alert_jLabel.setText("");
+        movie_no_jTextField.setText(model.getValueAt(i, 0).toString());
+        flag_jTextField.setText(model.getValueAt(i, 2).toString());
+        link_jTextField.setText(model.getValueAt(i, 3).toString());
+        movie_name_jTextField.setText(model.getValueAt(i, 4).toString());
+        desc_jTextField.setText(model.getValueAt(i, 5).toString());
+    }//GEN-LAST:event_movie_jTableMouseClicked
+
+    private void delete_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_jButtonActionPerformed
+
+        int row = movie_jTable.getSelectedRow();
+        int movieSerialNo;
+
+        if (row < 0){
+            alert_jLabel.setText("Please select a row from table");
+        } else {
+            try {
+                session = HibernateUtil.getSessionFactory().openSession();
+                movieSerialNo = Integer.parseInt(movie_jTable.getModel().getValueAt(row, 0).toString());
+                Object obj = session.load(Movie.class, movieSerialNo);
+                Movie movie = (Movie)obj;
+
+                Transaction tx;
+                tx = session.beginTransaction();
+                session.delete(movie);
+                tx.commit();
+                session.close();
+
+                movie_no_jTextField.setText("");
+                movie_name_jTextField.setText("");
+                link_jTextField.setText("");
+                desc_jTextField.setText("");
+                alert_jLabel.setText("DELETED Successfully. Click REFRESH.");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }//GEN-LAST:event_delete_jButtonActionPerformed
+
+    private void movie_name_jTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_movie_name_jTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_movie_name_jTextFieldActionPerformed
+
+    private void movie_name_jTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_movie_name_jTextFieldKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_movie_name_jTextFieldKeyTyped
+
+    private void movie_name_jTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_movie_name_jTextFieldKeyReleased
+        // TODO add your handling code here:
+        alert_jLabel.setText("");
+    }//GEN-LAST:event_movie_name_jTextFieldKeyReleased
+
+    private void refresh_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refresh_jButtonActionPerformed
+        // TODO add your handling code here: REFRESH
+        DefaultTableModel model = (DefaultTableModel) movie_jTable.getModel();
+        model.setRowCount(0);
+        show_all_data();
+        movie_no_jTextField.setText("");
+        movie_name_jTextField.setText("");
+        link_jTextField.setText("");
+        desc_jTextField.setText("");
+        flag_jTextField.setText("");
+    }//GEN-LAST:event_refresh_jButtonActionPerformed
+
+    private void manager_username_jTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manager_username_jTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_manager_username_jTextFieldActionPerformed
+
+    private void link_jTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_link_jTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_link_jTextFieldActionPerformed
+
+    private void link_jTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_link_jTextFieldKeyReleased
+        // TODO add your handling code here:
+        alert_jLabel.setText("");
+    }//GEN-LAST:event_link_jTextFieldKeyReleased
+
+    private void insert_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insert_jButtonActionPerformed
+        // TODO add your handling code here: INSERT
+        String movieSerialNo = movie_no_jTextField.getText();
+        String movieName = movie_name_jTextField.getText();
+        String trailerLink = link_jTextField.getText();
+        String movieDesc = desc_jTextField.getText();
+        String soonFlag = flag_jTextField.getText();
+        Date CURRENT_TIMESTAMP = new Date();
+
+        if ("".equals(movieSerialNo) | "".equals(movieName) | "".equals(trailerLink) | "".equals(movieDesc) | "".equals(soonFlag)) {
+            alert_jLabel.setText("Please fill empty field(s).");
+
+        } else {
+            try {
+
+                Movie movie = new Movie(current_user, CURRENT_TIMESTAMP, soonFlag, trailerLink, movieName, movieDesc, "s_img");
+                session = HibernateUtil.getSessionFactory().openSession();
+                Transaction tx;
+                tx = session.beginTransaction();
+                session.save(movie);
+                tx.commit();
+                session.close();
+
+                movie_no_jTextField.setText("");
+                movie_name_jTextField.setText("");
+                link_jTextField.setText("");
+                desc_jTextField.setText("");
+                flag_jTextField.setText("");
+                alert_jLabel.setText("INSERTED Successfully. Click REFRESH.");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }//GEN-LAST:event_insert_jButtonActionPerformed
+
+    private void update_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_jButtonActionPerformed
+        // TODO add your handling code here: UPDATE
+
+        String movieSerialNo = movie_no_jTextField.getText();
+        String movieName = movie_name_jTextField.getText();
+        String trailerLink = link_jTextField.getText();
+        String movieDesc = desc_jTextField.getText();
+        String soonFlag = flag_jTextField.getText();
+        Date CURRENT_TIMESTAMP = new Date();
+
+        int row = movie_jTable.getSelectedRow();
+        int current_serial_no;
+
+        if (row < 0){
+            alert_jLabel.setText("Please select a row from table");
+        } else if ("".equals(movieSerialNo) | "".equals(movieName) | "".equals(trailerLink) | "".equals(movieDesc) | "".equals(soonFlag)) {
+            alert_jLabel.setText("Please fill out here");
+        } else if (!(movieSerialNo.equals(movie_jTable.getModel().getValueAt(row, 0).toString()))){
+            alert_jLabel.setText("Please do not modify movieSerialNo!");
+
+        } else {
+            try {
+
+                session = HibernateUtil.getSessionFactory().openSession();
+                current_serial_no = Integer.parseInt(movie_jTable.getModel().getValueAt(row, 0).toString());
+                Object obj = session.load(Movie.class, current_serial_no);
+                Movie movie = (Movie)obj;
+
+                Transaction tx;
+                tx = session.beginTransaction();
+                movie.setMovieName(movieName);
+                movie.setTrailerLink(trailerLink);
+                movie.setSoonFlag(soonFlag);
+                movie.setMovieDesc(movieDesc);
+                movie.setCreatedDate(CURRENT_TIMESTAMP);
+                tx.commit();
+                session.close();
+
+                movie_no_jTextField.setText("");
+                movie_name_jTextField.setText("");
+                link_jTextField.setText("");
+                desc_jTextField.setText("");
+                flag_jTextField.setText("");
+                alert_jLabel.setText("UPDATED Successfully. Click REFRESH.");
+
+            } catch (NumberFormatException | HibernateException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }//GEN-LAST:event_update_jButtonActionPerformed
+
+    private void movie_no_jTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_movie_no_jTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_movie_no_jTextFieldActionPerformed
+
+    private void movie_no_jTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_movie_no_jTextFieldKeyReleased
+        // TODO add your handling code here:
+        alert_jLabel.setText("");
+    }//GEN-LAST:event_movie_no_jTextFieldKeyReleased
+
+    private void flag_jTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flag_jTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_flag_jTextFieldActionPerformed
+
+    private void flag_jTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_flag_jTextFieldKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_flag_jTextFieldKeyReleased
+
+    private void desc_jTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desc_jTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_desc_jTextFieldActionPerformed
+
+    private void desc_jTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_desc_jTextFieldKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_desc_jTextFieldKeyReleased
 
     /**
      * @param args the command line arguments
@@ -71,14 +555,32 @@ public class Manager_EditMovieFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Manager_EditMovieFrame().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Manager_EditMovieFrame(current_user).setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel alert_jLabel;
+    private javax.swing.JButton delete_jButton;
+    private javax.swing.JLabel desc_jLabel1;
+    private javax.swing.JTextField desc_jTextField;
+    private javax.swing.JLabel flag_jLabel;
+    private javax.swing.JTextField flag_jTextField;
+    private javax.swing.JButton insert_jButton;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel link_jLabel;
+    private javax.swing.JTextField link_jTextField;
+    private javax.swing.JLabel manager_username_jLabel;
+    private javax.swing.JTextField manager_username_jTextField;
+    private javax.swing.JLabel movie_jLabel;
+    private javax.swing.JTable movie_jTable;
+    private javax.swing.JLabel movie_name_jLabel1;
+    private javax.swing.JTextField movie_name_jTextField;
+    private javax.swing.JLabel movie_no_jLabel;
+    private javax.swing.JTextField movie_no_jTextField;
+    private javax.swing.JButton refresh_jButton;
+    private javax.swing.JButton update_jButton;
     // End of variables declaration//GEN-END:variables
 
 }

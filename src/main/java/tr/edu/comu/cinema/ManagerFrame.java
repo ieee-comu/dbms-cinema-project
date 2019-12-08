@@ -272,7 +272,7 @@ public class ManagerFrame extends javax.swing.JFrame {
                         menu.setVisible(true);
                         setVisible(false);
                     } else {
-                        Manager_EditMovieFrame menu = new Manager_EditMovieFrame();
+                        Manager_EditMovieFrame menu = new Manager_EditMovieFrame((Manager)results.get(0));
                         menu.setVisible(true);
                         setVisible(false);
                     }

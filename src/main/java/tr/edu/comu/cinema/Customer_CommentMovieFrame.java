@@ -292,6 +292,7 @@ public class Customer_CommentMovieFrame extends javax.swing.JFrame {
         show_all_data();
         movie_serial_no_jTextField.setText("");
         alert_customer_jLabel.setText("");
+        comment_jTextPane.setText("");
     }//GEN-LAST:event_refresh_jButtonActionPerformed
 
     private void movie_serial_no_jTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_movie_serial_no_jTextFieldActionPerformed
@@ -338,6 +339,7 @@ public class Customer_CommentMovieFrame extends javax.swing.JFrame {
             } catch (NumberFormatException | HibernateException e) {
                 JOptionPane.showMessageDialog(null, e);
             }
+            comment_jTextPane.setText("");
         }
     }//GEN-LAST:event_insert_jButtonActionPerformed
 
@@ -367,6 +369,7 @@ public class Customer_CommentMovieFrame extends javax.swing.JFrame {
             } catch (NumberFormatException | HibernateException e) {
                 JOptionPane.showMessageDialog(null, e);
             }
+            comment_jTextPane.setText("");
         }
 
        
