@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 8, 2019 12:24:53 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Dec 8, 2019 2:02:53 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entity.Customer" table="customer" catalog="cinema_project" optimistic-lock="version">
         <id name="username" type="string">
@@ -14,8 +14,8 @@
         <property name="email" type="string">
             <column name="email" length="50" not-null="true" />
         </property>
-        <property name="createdDate" type="date">
-            <column name="created_date" length="10" not-null="true" />
+        <property name="createdDate" type="timestamp">
+            <column name="created_date" length="19" not-null="true" />
         </property>
         <property name="address" type="string">
             <column name="address" length="50" not-null="true" />

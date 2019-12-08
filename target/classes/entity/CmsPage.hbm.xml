@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 8, 2019 12:24:53 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Dec 8, 2019 2:02:53 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entity.CmsPage" table="cms_page" catalog="cinema_project" optimistic-lock="version">
         <id name="pageTitle" type="string">
@@ -20,8 +20,8 @@
         <property name="pageDesc" type="string">
             <column name="page_desc" length="50" not-null="true" />
         </property>
-        <property name="modifiedDate" type="date">
-            <column name="modified_date" length="10" not-null="true" />
+        <property name="modifiedDate" type="timestamp">
+            <column name="modified_date" length="19" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>
