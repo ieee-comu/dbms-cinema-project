@@ -6,6 +6,7 @@
 
 package tr.edu.comu.cinema;
 
+import entity.Manager;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.util.List;
@@ -267,7 +268,7 @@ public class ManagerFrame extends javax.swing.JFrame {
                 if ((results != null) && (results.size() > 0)) {
                     JOptionPane.showMessageDialog(null, "Login SUCCESSFUL!!!");
                     if ("Control CMS Page".equals(as_jLabel.getText())) {
-                        Manager_ControlCmsPageFrame menu = new Manager_ControlCmsPageFrame();
+                        Manager_ControlCmsPageFrame menu = new Manager_ControlCmsPageFrame((Manager)results.get(0));
                         menu.setVisible(true);
                         setVisible(false);
                     } else {
