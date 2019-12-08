@@ -284,7 +284,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                         menu.setVisible(true);
                         setVisible(false);
                     } else {
-                        Customer_CommentMovieFrame menu = new Customer_CommentMovieFrame();
+                        Customer_CommentMovieFrame menu = new Customer_CommentMovieFrame((Customer)results.get(0));
                         menu.setVisible(true);
                         setVisible(false);
                     }

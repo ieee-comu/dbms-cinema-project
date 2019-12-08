@@ -1,5 +1,5 @@
 package entity;
-// Generated Dec 8, 2019 1:55:43 AM by Hibernate Tools 4.3.1
+// Generated Dec 8, 2019 12:24:52 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -17,7 +17,7 @@ public class Movie  implements java.io.Serializable {
      private Date createdDate;
      private String soonFlag;
      private String trailerLink;
-     private int movieName;
+     private String movieName;
      private String movieDesc;
      private String movieImage;
      private Set canCommentOns = new HashSet(0);
@@ -26,7 +26,7 @@ public class Movie  implements java.io.Serializable {
     }
 
 	
-    public Movie(Manager manager, Date createdDate, String soonFlag, String trailerLink, int movieName, String movieDesc, String movieImage) {
+    public Movie(Manager manager, Date createdDate, String soonFlag, String trailerLink, String movieName, String movieDesc, String movieImage) {
         this.manager = manager;
         this.createdDate = createdDate;
         this.soonFlag = soonFlag;
@@ -35,7 +35,7 @@ public class Movie  implements java.io.Serializable {
         this.movieDesc = movieDesc;
         this.movieImage = movieImage;
     }
-    public Movie(Manager manager, Date createdDate, String soonFlag, String trailerLink, int movieName, String movieDesc, String movieImage, Set canCommentOns) {
+    public Movie(Manager manager, Date createdDate, String soonFlag, String trailerLink, String movieName, String movieDesc, String movieImage, Set canCommentOns) {
        this.manager = manager;
        this.createdDate = createdDate;
        this.soonFlag = soonFlag;
@@ -81,11 +81,11 @@ public class Movie  implements java.io.Serializable {
     public void setTrailerLink(String trailerLink) {
         this.trailerLink = trailerLink;
     }
-    public int getMovieName() {
+    public String getMovieName() {
         return this.movieName;
     }
     
-    public void setMovieName(int movieName) {
+    public void setMovieName(String movieName) {
         this.movieName = movieName;
     }
     public String getMovieDesc() {

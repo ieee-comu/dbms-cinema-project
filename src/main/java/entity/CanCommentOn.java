@@ -1,5 +1,5 @@
 package entity;
-// Generated Dec 8, 2019 1:55:43 AM by Hibernate Tools 4.3.1
+// Generated Dec 8, 2019 12:24:52 PM by Hibernate Tools 4.3.1
 
 
 
@@ -9,24 +9,23 @@ package entity;
 public class CanCommentOn  implements java.io.Serializable {
 
 
-     private CanCommentOnId id;
+     private Integer id;
      private Customer customer;
      private Movie movie;
 
     public CanCommentOn() {
     }
 
-    public CanCommentOn(CanCommentOnId id, Customer customer, Movie movie) {
-       this.id = id;
+    public CanCommentOn(Customer customer, Movie movie) {
        this.customer = customer;
        this.movie = movie;
     }
    
-    public CanCommentOnId getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(CanCommentOnId id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public Customer getCustomer() {

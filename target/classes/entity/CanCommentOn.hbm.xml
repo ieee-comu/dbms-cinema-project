@@ -1,21 +1,17 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 8, 2019 1:55:43 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Dec 8, 2019 12:24:53 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entity.CanCommentOn" table="can_comment_on" catalog="cinema_project" optimistic-lock="version">
-        <composite-id name="id" class="entity.CanCommentOnId">
-            <key-property name="customerUsername" type="string">
-                <column name="customer_username" length="50" />
-            </key-property>
-            <key-property name="movieSerialNo" type="int">
-                <column name="movie_serial_no" />
-            </key-property>
-        </composite-id>
-        <many-to-one name="customer" class="entity.Customer" update="false" insert="false" fetch="select">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="customer" class="entity.Customer" fetch="select">
             <column name="customer_username" length="50" not-null="true" />
         </many-to-one>
-        <many-to-one name="movie" class="entity.Movie" update="false" insert="false" fetch="select">
+        <many-to-one name="movie" class="entity.Movie" fetch="select">
             <column name="movie_serial_no" not-null="true" />
         </many-to-one>
     </class>

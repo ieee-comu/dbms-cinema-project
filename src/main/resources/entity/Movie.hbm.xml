@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 8, 2019 1:55:43 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Dec 8, 2019 12:24:53 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entity.Movie" table="movie" catalog="cinema_project" optimistic-lock="version">
         <id name="movieSerialNo" type="java.lang.Integer">
@@ -20,8 +20,8 @@
         <property name="trailerLink" type="string">
             <column name="trailer_link" length="50" not-null="true" />
         </property>
-        <property name="movieName" type="int">
-            <column name="movie_name" not-null="true" />
+        <property name="movieName" type="string">
+            <column name="movie_name" length="50" not-null="true" />
         </property>
         <property name="movieDesc" type="string">
             <column name="movie_desc" length="50" not-null="true" />

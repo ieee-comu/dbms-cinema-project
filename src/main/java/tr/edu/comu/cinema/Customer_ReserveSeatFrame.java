@@ -325,27 +325,6 @@ public class Customer_ReserveSeatFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, e);
             }
         }
-
-//        } else {
-//            try {
-//                session = HibernateUtil.getSessionFactory().openSession();
-//                current_id_value = Integer.parseInt(seat_jTable.getModel().getValueAt(row, 0).toString());
-//                Object obj = session.load(Seat.class, current_id_value);
-//                Seat seat = (Seat)obj;
-//                
-//                Transaction tx;
-//                tx = session.beginTransaction();
-//                session.delete(seat);
-//                tx.commit();
-//                session.close();
-//                
-//                seat_no_jTextField.setText("");
-//                alert_seat_price_jLabel.setText("DELETED Successfully. Click REFRESH to see changes.");
-//
-//            } catch (Exception e) {
-//                JOptionPane.showMessageDialog(null, e);
-//            }
-//        } 
     }//GEN-LAST:event_delete_jButtonActionPerformed
 
     private void refresh_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refresh_jButtonActionPerformed
