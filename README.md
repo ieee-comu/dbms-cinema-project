@@ -8,6 +8,7 @@ cinema automation project
     - Netbeans
     - Hibernate &#x2764;
     - Java Forms
+    - Maven
     - Git &#x2764;
     - MySql
 
