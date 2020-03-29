@@ -3,7 +3,7 @@ cinema automation project
 
 - lecture     : database management systems  - fall 2019<br>
 - project     : cinema automation project / sinema otomasyon projesi<br>
-- contributors: Bayram Cicek, Tolga Aksoy<br>
+- contributors: Bayram Çiçek, Tolga Aksoy<br>
 - Tools:
     - Netbeans
     - Hibernate &#x2764;
